@@ -20,7 +20,9 @@ students = []
 #return 'This is the first line of code'
 file_path = 'q-vercel-python_2.json'
 with open(file_path, 'r') as file:
-          data_1=json.load(file)
+    data_1=json.load(file)
+        
+
 
 #with open('q-vercel-python.json, mode='r') as file:
  #    reader = json.load(file)
@@ -36,7 +38,7 @@ async def get_students(name: Optional[List[str]] = Query(None)):
     #return(f"Requested names: {name}")  # Debugging line
     if name:
         #filtered_students = [student for student in students if student["name"] in name_]
-        filtered_students = [entry for entry in data_1 if entry['name'] in name] 
+        filtered_students = [entry['marks'] for entry in data_1 if entry['name'] in name] 
         print(f"Filtered students: {filtered_students}")  # Debugging line
         return {"marks": filtered_students}
     return {"marks": students}
