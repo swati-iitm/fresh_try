@@ -20,11 +20,11 @@ students = []
 with open('q-vercel-python.json, mode='r') as file:
     reader = json.load(file)
     
-    for row in reader:
-        students.append({
-            "name":  row["name"]),
-            "marks": row["marks"]
-        })
+  #  for row in reader:
+   #     students.append({
+    #        "name":  row["name"]),
+     #       "marks": row["marks"]
+      #  })
 
 @app.get("/")
 async def get_students(name_: Optional[List[str]] = Query(None)):
