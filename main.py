@@ -22,7 +22,7 @@ with open('q-vercel-python.json, mode='r') as file:
     
     for row in reader:
         students.append({
-            "name": int(row["name"]),
+            "name":  row["name"]),
             "marks": row["marks"]
         })
 
