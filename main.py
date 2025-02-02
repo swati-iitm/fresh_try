@@ -24,10 +24,10 @@ with open('q-vercel-python.json', mode='r') as file:
         })
 
 @app.get("/")
-async def get_students(name: Optional[List[str]] = Query(None)):
-    print(f"Requested names: {name}")  # Debugging line
-    if name:
-        filtered_students = [student for student in students if student["name"] in name]
+async def get_students(name_: Optional[List[str]] = Query(None)):
+    print(f"Requested names: {name_}")  # Debugging line
+    if name_:
+        filtered_students = [student for student in students if student["name"] in name_]
         print(f"Filtered students: {filtered_students}")  # Debugging line
         return {"marks": filtered_students}
     return {"marks": students}
