@@ -21,9 +21,7 @@ students = []
 file_path = 'q-vercel-python_2.json'
 with open(file_path, 'r') as file:
     data_1=json.load(file)
-        
-
-
+    
 #with open('q-vercel-python.json, mode='r') as file:
  #    reader = json.load(file)
     
