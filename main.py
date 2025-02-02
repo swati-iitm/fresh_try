@@ -1,11 +1,10 @@
 from fastapi import FastAPI, Query
-from flask import Flask, request, jsonify
-import json
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
-import csv
+import json
 
 app = FastAPI()
+
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
@@ -15,43 +14,28 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-# Load student data from the specified CSV file
-students = []
-#return 'This is the first line of code'
-file_path = 'q-vercel-python_2.json'
-with open(file_path, 'r') as file:
-    data_1=json.load(file)
-    
-#with open('q-vercel-python.json, mode='r') as file:
- #    reader = json.load(file)
-    
-  #  for row in reader:
-   #     students.append({
-    #        "name":  row["name"]),
-     #       "marks": row["marks"]
-      #  })
+# Load student data from the specified JSON file
+file_path = "q-vercel-python_2.json"
+
+try:
+    with open(file_path, "r") as file:
+        students = json.load(file)  # Load data into `students`
+except FileNotFoundError:
+    students = []  # Default to an empty list if the file is missing
+
+# Convert list of students to a dictionary for quick lookup
+students_dict = {entry["name"]: entry["marks"] for entry in students}
 
 @app.get("/")
-async def get_students(name: Optional[List[str]] = Query(None)):
-    #return(f"Requested names: {name}")  # Debugging line
+async def get_students(name: Optional[List[str]] = Query(default=[])):
+    """Fetch student marks based on optional name filtering while maintaining order."""
     if name:
-        #filtered_students = [student for student in students if student["name"] in name_]
-        filtered_students = [entry['marks'] for entry in data_1 if entry['name'] in name] 
-        print(f"Filtered students: {filtered_students}")  # Debugging line
-        return {"marks": filtered_students}
-    return {"marks": students}
+        # Preserve the order in which names are passed
+        filtered_marks = [students_dict.get(n, None) for n in name]
+        return {"marks": filtered_marks}
+    
+    return {"marks": students}  # Return all data if no filter is applied
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
-#def read_root():
- #   file_path = 'q-vercel-python.json'  # JSON file path
-  #  name_filter=request.args.getlist('name')
-   # return 'reached here'
-    #if not name_filter:
-     #   return 'No names passed'
-    #with open(file_path, 'r') as file:
-     #   data_1=json.load(file)
-    #filtered_data = [entry['marks'] for entry in data_1 if entry['name'] in name_filter] 
-    #return {"marks": "Hello, World!"}
