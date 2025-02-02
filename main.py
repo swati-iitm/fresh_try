@@ -19,7 +19,7 @@ app.add_middleware(
 students = []
 #return 'This is the first line of code'
 with open('q-vercel-python.json, mode='r') as file:
-          reader = json.load(file)
+     reader = json.load(file)
     
   #  for row in reader:
    #     students.append({
