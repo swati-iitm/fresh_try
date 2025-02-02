@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Query
-from flask import Flask, request, jsonify
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 import csv
 
+app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +22,7 @@ with open('q-vercel-python.json', mode='r') as file:
             "name": int(row["name"]),
             "marks": row["marks"]
         })
-app = FastAPI()
+
 @app.get("/")
 async def get_students(name_: Optional[List[str]] = Query(None)):
     print(f"Requested names: {name_}")  # Debugging line
