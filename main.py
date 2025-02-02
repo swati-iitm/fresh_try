@@ -18,6 +18,10 @@ app.add_middleware(
 # Load student data from the specified CSV file
 students = []
 #return 'This is the first line of code'
+file_path = 'q-vercel-python.json'
+with open(file_path, 'r') as file:
+          data_1=json.load(file)
+
 #with open('q-vercel-python.json, mode='r') as file:
  #    reader = json.load(file)
     
