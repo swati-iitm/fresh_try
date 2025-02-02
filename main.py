@@ -32,9 +32,9 @@ with open(file_path, 'r') as file:
       #  })
 
 @app.get("/")
-async def get_students(name_: Optional[List[str]] = Query(None)):
-    print(f"Requested names: {name_}")  # Debugging line
-    if name_:
+async def get_students(name: Optional[List[str]] = Query(None)):
+    print(f"Requested names: {name}")  # Debugging line
+    if name:
         #filtered_students = [student for student in students if student["name"] in name_]
         filtered_students = [entry['marks'] for entry in data_1 if entry['name'] in name_] 
         print(f"Filtered students: {filtered_students}")  # Debugging line
