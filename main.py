@@ -17,6 +17,7 @@ app.add_middleware(
 students = []
 with open('q-vercel-python.json', mode='r') as file:
     reader = csv.DictReader(file)
+    return reader
     for row in reader:
         students.append({
             "name": int(row["name"]),
