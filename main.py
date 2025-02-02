@@ -1,4 +1,4 @@
-from fastapi import FastAPI, request, jsonify
+from fastapi import FastAPI, request
 
 app = FastAPI()
 
